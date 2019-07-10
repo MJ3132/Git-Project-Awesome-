@@ -9,7 +9,7 @@ const passportSetup = require('./config/passport-setup');
 const authRoutes = require("./app/routes/auth-routes");
 const {mongodb} = require('./config/keys');
 const cookieSession = require('cookie-session');
-
+const db = require("./config/keys").mongoURI;
 const app = express();
 const projectRoutes = require('./app/routes/project');
 const userRoutes = require('./app/routes/users');
@@ -63,7 +63,7 @@ app.use('/api/auth', authRoutes);
 
 
 
-var db =  mongodb;
+
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 *1000,
@@ -87,7 +87,7 @@ app.use(passport.session());
 // yarn build connects the back end with the front end
 
 // process.env.MONGODB_URI ||
-mongoose.connect( process.env.MONGODB_URI || db,function (err,res){
+mongoose.connect( process.env.MONGO_URI || db,function (err,res){
 
   useNewUrlParser : true
 

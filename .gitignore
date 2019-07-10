@@ -5,4 +5,5 @@ keys.js
 scratch
 .env
 
+package-lock.json
 .vscode
