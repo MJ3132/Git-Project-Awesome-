@@ -61,15 +61,6 @@ app.use("/collaborators",collaboratorsRoutes);
 app.use('/api/auth', authRoutes);
 
 
-// // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
-  
-
-}
 
 
 var db =  "mongodb+srv://martyj:picmaker@cluster0-cp3mt.mongodb.net/picAwesome?retryWrites=true&w=majority";
@@ -96,17 +87,28 @@ app.use(passport.session());
 // yarn build connects the back end with the front end
 
 // process.env.MONGODB_URI ||
-mongoose.connect(  db,function (err,res){
+mongoose.connect( process.env.MONGODB_URI || db,function (err,res){
+
+  useNewUrlParser : true
 
   if (res){
     console.log("connected to MongoDb!")
   } else {
     console.log(err);
   }
+});
+
+
+
+// // Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build")); // tell the server where our react compiled build folder of our app is
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  });
+  
+
 }
-
-);
-
 app.listen(PORT, function () {
   
 
