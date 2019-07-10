@@ -1,0 +1,163 @@
+body {
+    background-color: #333;
+}
+
+.tab-style ul > li > a {
+    background-color: #333;
+    color:  #00e6e6;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.tab-style ul > li > a:hover {
+    background-color:#009999;
+    color: white;
+}
+
+.tab-style ul > li.active > a,
+.tab-style ul > li.active > a:hover,
+.tab-style ul > li.active > a:focus {
+    background-color:#004d4d;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.navbar a:focus
+{
+    color: #009999
+}
+.dashbard-style 
+{
+    background-image: url("https://images.pexels.com/photos/953214/pexels-photo-953214.jpeg?auto=compress&cs=tinysrgb&h=350");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: auto;
+}
+
+
+.img-thumbnail {
+
+    height:250px;
+    justify-content: center;
+
+}
+
+.thumbnail .caption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    overflow: auto;
+
+}
+
+.content {
+    font-weight: 200;
+
+}
+
+
+.btn-container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn 
+
+{
+
+    margin-top: 4px;
+    color:white;
+    padding: 3px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    padding:2px;
+    background-color:lightseagreen;
+    align-items:center;
+    justify-content: center;
+    display: flex;
+  
+    align-items: center;
+    
+}
+
+
+
+.flexContainer
+{
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: space-between; */
+    align-items: flex-start;
+    width: 100%;
+    margin: 2% 0;
+    overflow: auto;
+   
+}      
+
+.flexThumbnail
+{
+    display: flex;
+    /* flex-flow: row nowrap; */
+    justify-content: center;
+    width: 32%;
+    /* align-items: flex-start; */
+    overflow: 0 auto;
+    max-height: 600px;
+    margin: 3px;
+    padding: 2px;
+    border:5px solid #009999;
+}
+
+@media screen and (max-width: 800px){
+    .flexContainer{
+        display: flex;
+        width: 100%;
+        flex-direction:  row wrap;
+    }
+
+    
+.flexThumbnail
+{
+    display: flex;
+    /* flex-flow: row wrap; */
+    justify-content: space-between;
+    width: 47%;
+
+    height: 450px;
+    overflow: auto;
+    margin: 4px;
+}
+}
+
+@media screen and (max-width: 575px){
+    .flexContainer{
+   
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+    .flexThumbnail
+{
+    display: flex;
+    /* flex-flow: row wrap; */
+    justify-content: space-between;
+    width: 95%;
+    /* align-items: flex-start; */
+    /* height: 420px; */
+    /* overflow: auto; */
+    /* margin: 4px; */
+}
+}
