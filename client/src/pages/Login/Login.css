@@ -12,7 +12,6 @@ body{
     color: white;
     font-weight: bold;
     font-size: 6rem;
-    stroke: 10px white;
     text-shadow: black 0 0 10px;
     position: relative;
     margin-bottom: 2rem;
@@ -23,11 +22,8 @@ body{
 .subtitle{
     color:white;
     text-shadow: black 0 0 10px;
-    font-size: 22px;
-    opacity: 0%;
+    font-size: 2rem;
     position: relative;
-    transform: translateY(-50%); 
-    margin: auto;
     padding-top: 0px;
     margin-bottom: 3%;
 
