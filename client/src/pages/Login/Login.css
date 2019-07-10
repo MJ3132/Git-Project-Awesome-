@@ -1,6 +1,7 @@
 body{
     height: 100vh;
     width: 100%;
+    padding : 2rem;
 }
 
 .frost-banner{
@@ -10,14 +11,12 @@ body{
 .title{
     color: white;
     font-weight: bold;
-    font-size: 60px;
+    font-size: 6rem;
     stroke: 10px white;
     text-shadow: black 0 0 10px;
-    opacity: 0%;
     position: relative;
-  
-    margin-bottom: 3%;
-    margin-top: 1%;
+    margin-bottom: 2rem;
+    
  
 }
 

@@ -136,7 +136,7 @@ class Login extends Component {
         }
     
 
-        axios.post('https://mern-git-project-hub.herokuapp.com/api/auth/account/signin', signinInfo )
+        axios.post('/api/auth/account/signin', signinInfo )
         .then((res) => {
 
             
@@ -307,15 +307,16 @@ class Login extends Component {
                 
                 <div className="main-container">
                
-                <div style={{display:"flex", width:"100%", margin:"10px", alignItems:"flex-end", justifyContent:"flex-end"}}>
-                <button onClick={this.handleShowSignIn}>{this.state.signup ? <p>Sign In?</p> : <p>Sign Up?</p>}</button>
+                <div style={{display:"flex", width:"100%", marginRight:"10px", alignItems:"center", justifyContent:"flex-end"}}>
+                <button style={{marginTop:"10px", background:"lightseagreen", color: "white" ,border:"1px solid black"}} onClick={this.handleShowSignIn}>{this.state.signup ? <p>Sign In?</p> : <p>Sign Up?</p>}</button>
                 </div>
-                        
+                    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", textAlign:"center"}}>
                     <h1 className="title">Welcome to the Git Project Hub!</h1>
+                    <br />
                     <p className="subtitle"><b>theGigMaker</b> A web-based application that allows
                 users to find git projects based on your interests and specialities.
                         </p>
-               
+                        </div> 
                   
                 <div >
                         {signup}
