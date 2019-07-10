@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "server.js",
     "test": "mocha",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
