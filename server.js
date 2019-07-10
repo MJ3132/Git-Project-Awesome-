@@ -2,12 +2,13 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
 const authRoutes = require("./app/routes/auth-routes");
-const {mongodb} = require('./config/keys');
+const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const db = require("./config/keys").mongoURI;
 const app = express();
@@ -15,6 +16,8 @@ const projectRoutes = require('./app/routes/project');
 const userRoutes = require('./app/routes/users');
 const collaboratorsRoutes = require('./app/routes/collaborator');
 const mongoose = require("mongoose");
+
+require('dotenv').config()
 
 // global promises
 mongoose.Promise = global.Promise;
@@ -87,7 +90,7 @@ app.use(passport.session());
 // yarn build connects the back end with the front end
 
 // process.env.MONGODB_URI ||
-mongoose.connect( process.env.MONGO_URI || db,function (err,res){
+mongoose.connect( process.env.MONGO_URI || process.env.DB_HOST,function (err,res){
 
   useNewUrlParser : true
 

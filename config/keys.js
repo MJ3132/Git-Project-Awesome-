@@ -5,7 +5,7 @@ module.exports = {
     },
     mongodb:
     {
-        dbURI: 'mongodb+srv://martyj:picmaker@cluster0-cp3mt.mongodb.net/picAwesome?retryWrites=true&w=majority'
+        dbURI:'mongodb://testoauthadmin:password1@ds157923.mlab.com:57923/test-oauth-db'
     },
     session:
     {
