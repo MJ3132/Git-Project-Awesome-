@@ -90,7 +90,7 @@ app.use(passport.session());
 // yarn build connects the back end with the front end
 
 // process.env.MONGODB_URI ||
-mongoose.connect( process.env.MONGO_URI || process.env.DB_HOST,function (err,res){
+mongoose.connect( process.env.MONGODB_URI || process.env.DB_HOST,function (err,res){
 
   useNewUrlParser : true
 
