@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
 const authRoutes = require("./app/routes/auth-routes");
-const keys = require('./config/keys');
+const {mongodb} = require('./config/keys');
 const cookieSession = require('cookie-session');
 
 const app = express();
@@ -63,7 +63,7 @@ app.use('/api/auth', authRoutes);
 
 
 
-var db =  "mongodb+srv://martyj:picmaker@cluster0-cp3mt.mongodb.net/picAwesome?retryWrites=true&w=majority";
+var db =  mongodb;
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 *1000,
