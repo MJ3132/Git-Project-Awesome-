@@ -313,7 +313,7 @@ class Login extends Component {
                     <div style={{display:"flex", flexDirection:"column", justifyContent:"center", textAlign:"center"}}>
                     <h1 className="title">Welcome to the Git Project Hub!</h1>
                     <br />
-                    <p className="subtitle"><b>theGigMaker</b> A web-based application that allows
+                    <p className="subtitle"> A web-based application that allows
                 users to find git projects based on your interests and specialities.
                         </p>
                         </div> 

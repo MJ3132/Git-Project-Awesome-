@@ -26,6 +26,7 @@ class AddProject extends Component {
     super(props);
 
     this.state = {
+      username : "",
       show: false,
       title: "",
       description: "",
@@ -58,7 +59,11 @@ class AddProject extends Component {
           console.log(res)
           if (res.data.status == "good") {
 
-            this.setState({ token });
+            this.setState({ token,
+              username: res.data.username
+
+            
+            });
 
 
             let userId = res.data.userId;
@@ -197,7 +202,7 @@ class AddProject extends Component {
         <Navbar inverse collapseOnSelect className="navbar">
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/dashboard" style={{ color: "white", textDecoration: "none" }}>Welcome, {this.state.user.username}</a>
+              <a href="/dashboard" style={{ color: "white", textDecoration: "none" }}>Welcome, {this.state.username}</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
