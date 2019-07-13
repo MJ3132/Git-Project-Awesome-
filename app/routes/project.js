@@ -8,7 +8,7 @@ const db = require("../models/index");
 
 const mongoose = require('mongoose');
 
-const Collaborator = ('../models/collaborator');
+const Collaborator = require('../models/collaborator');
 
 const Project = require('../models/Projects');
 const User = require('../models/User');
@@ -47,9 +47,15 @@ router.get("/all/:projectId?", function (req, res) {
 
             console.log('herro ' + dbProjects);
 
+            const uniqueProjects = Array.from(new Set(dbProjects.map(a => a._id)))
+            .map(id => {
+                return col.find(a => a.id === id)
+              });
+            
+
             res.status(200).json({
                 message: "Project(s) has been found!",
-                data: dbProjects
+                data: uniqueProjects
 
                 // populatedProject: dbProjects.map(doc => {
 
@@ -191,43 +197,44 @@ router.post("/create", function (req, res) {
 // delete a project by Id (creator)
 router.delete("/delete/:projectId", function (req, res) {
 
-    console.log(req.params.projectId);
-
-    Project.deleteOne({ _id: req.params.projectId }, function (err, data) {
-
-    //     Collaborator.deleteOne({projectId : req.params.projectId}).then((res) => {
-
-    //  
-           console.log("collaboartor deleted" + res )
-
-    if (data) {
-    res.status(200).json({
-
-        message: 'project has been deleted',
-        data : data
+    // console.log(req.params.projectId);
+    // let projectId = req.params.projectId;
 
 
-    })
-
-} else {
-    res.status(200).json({
-
-        message: 'project has not been deleted',
-        error : err
+        Project.deleteOne({_id : req.params.projectId}).then(responseMany => {
 
 
-    })
+            Collaborator.deleteMany({ projectId : {$in : {_id : req.params.projectId}}}).then(response => {
 
-}
+                res.json({message: "success"});
 
-      
-     
+            }).catch( err => console.log(err));
 
-    })
+    }).catch(err => console.log(err));
+
+        // Collaborator.remove({projectId: projectId }).then((res) => {
+
+        //         console.log("deleted collaborator"  + res)
+        //     res.status(200).json({
+
+        //         message: 'project has been deleted',
+        //         data: res
+
+        //     })
+
+        // }).catch(err => console.log(err));
+    
+
+        //     Collaborator.remove({  projectId : projectId }).then(res => {
+
+        //         console.log(response)
+   
+
+        // }).catch(err => console.log(err))
+
+    // })
 
 })
-
-
 // update content (creator)
 // do we need to send back updated info?
 router.put("/update/:projectId?", function (req, res) {

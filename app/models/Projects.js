@@ -106,8 +106,18 @@
 
 })
 
+ProjectSchema.pre('remove', function(next) {
+  // Remove all the assignment docs that reference the removed person.
+      this.model('gigster').remove({ projectId: this._id }, next);
+
+
+});
+
 
   var Project = mongoose.model("Project", ProjectSchema);
   // var Collaborator = mongoose.model("Collaborators", collaboratorSchema);
+ 
 
-  module.exports =  Project
+
+
+  module.exports =  Project;
