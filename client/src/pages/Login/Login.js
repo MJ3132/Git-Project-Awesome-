@@ -22,8 +22,8 @@ class Login extends Component {
         signUpError: "",
         signInError: "",
 
-        signup : true,
-        signin : false,
+        signup : false,
+        signin : true,
 
         signUpEmail : "",
         signUpUsername : "",
@@ -205,7 +205,7 @@ class Login extends Component {
         let signup;
         if (!this.state.token && this.state.signup) {
                 signup = (
-                    <div style={{display:"flex" , padding:"10px", width: "300px", justifyContent:"flex-start",border:"2px solid grey",  background:"lightseagreen", opacity:"0.9",flexDirection : "column"}}>
+                    <div style={{display:"flex" ,  borderRadius:"5px",padding:"15px", width: "300px", justifyContent:"flex-start",border:"2px solid grey",  background:"lightseagreen", opacity:"0.9",flexDirection : "column"}}>
                         <h4 style={{alignSelf: "center" , fontWeight: "800"}}>Register</h4>
                         <label>Email :</label> <br />
                         <input 
@@ -250,7 +250,7 @@ class Login extends Component {
         let signin;
         if (!this.state.token && this.state.signin) {
                 signin = (
-                    <div style={{display:"flex" , padding:"10px", width: "300px", justifyContent:"flex-start",border:"2px solid grey", background:"lightseagreen", opacity:"0.9",flexDirection : "column"}}>
+                    <div style={{display:"flex" , borderRadius:"5px", padding:"10px", width: "300px", justifyContent:"flex-start",border:"2px solid grey", background:"lightseagreen", opacity:"0.9",flexDirection : "column"}}>
           
                         <h4 style={{alignSelf: "center" , fontWeight: "800"}}>Sign in</h4>
                                        
@@ -308,7 +308,7 @@ class Login extends Component {
                 <div className="main-container">
                
                 <div style={{display:"flex", width:"100%", marginRight:"10px", alignItems:"center", justifyContent:"flex-end"}}>
-                <button style={{marginTop:"10px", background:"lightseagreen", color: "white" ,border:"1px solid black"}} onClick={this.handleShowSignIn}>{this.state.signup ? <p>Sign In?</p> : <p>Sign Up?</p>}</button>
+                <button style={{marginTop:"10px", borderRadius:"5px", background:"lightseagreen", color: "white" ,border:"1px solid grey"}} onClick={this.handleShowSignIn}>{this.state.signup ? <p>Sign In?</p> : <p>Sign Up?</p>}</button>
                 </div>
                     <div style={{display:"flex", flexDirection:"column", justifyContent:"center", textAlign:"center"}}>
                     <h1 className="title">Welcome to the Git Project Hub!</h1>

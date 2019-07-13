@@ -27,7 +27,7 @@ class Dashboard extends Component {
     this.handleGigHide = this.handleGigHide.bind(this);
     this.handleUpdateHide = this.handleUpdateHide.bind(this);
     this.approveProject = this.approveProject.bind(this);
-    this.deleteProject = this.deleteProject.bind(this);
+
 
     this.state = {
       username: "",
@@ -137,7 +137,7 @@ class Dashboard extends Component {
 
   handleDeleteID = (id) => {
     console.log(id);
-    API.deleteProject(id).then(res => this.getUserObject());
+    API.deleteProject(id).then(res => console.log(res));
 
 
 
@@ -175,7 +175,7 @@ class Dashboard extends Component {
                   this.setState({
                     myprojects: res.data.data,
                     username: username,
-                    collabedProjects : res.data.data.gigsters
+                    // collabprojects: res.data.data.gigsters
 
                   })
 
@@ -243,9 +243,49 @@ class Dashboard extends Component {
 
         API.collabedProjects(userId).then((projectIds => {
 
-          console.log(projectIds.data);
-          let col = projectIds.data.map ( collab => collab.projectId);
+        //   function hasDuplicates(col) {
 
+        //     Array.from(new Set(col.map( a => a.id)))
+        //     .map(id => {
+        //       return col.find(a => a.id === id)
+        //     })  
+        // }
+          console.log(projectIds.data);
+          let col = projectIds.data.map(collab => collab.projectId);
+
+
+        console.log(col);
+
+        
+          function getUnique(arr, comp) {
+
+            const unique = arr
+                 .map(e => e[comp])
+          
+               // store the keys of the unique objects
+              .map((e, i, final) => final.indexOf(e) === i && i)
+          
+              // eliminate the dead keys & store unique objects
+              .filter(e => arr[e]).map(e => arr[e]);
+          
+             return unique;
+          }
+          
+          col = getUnique(col, "id");
+
+        
+      
+
+
+            // .map(id => {
+            //      console.log(id);
+            //   });
+
+          // .map(id => {
+          //   return addresses.find(a => a.id === id)
+          // })
+
+    
           console.log(col);
 
           CollabProjectIds = projectIds.data;
@@ -253,26 +293,33 @@ class Dashboard extends Component {
           console.log(CollabProjectIds);
           let newArray;
         
-      
-            // newArray = res.data.data.filter(obj => obj.userId !== userId);
-          // projects id are not the collaboration project ids
-        
+
+
           newArray = res.data.data.filter(obj => obj.userId !== userId);
+          // projects id are not the collaboration project ids
+          // obj.userId !== userId
+          // newArray = res.data.data.map(obj =>  obj.gigster.filter(gigster => {  return (gigster.projectId !== userId  
+          //     && obj.userId !== userId ) }) );
+          // newArray.map(array =>  array.gigster.filter( gigster => gigster.projectId !== userId));
           console.log(newArray);
 
+
+          //  col.map(id => {  console.log(id)  });
+
+
       
-
-        //  col.map(id => {  console.log(id)  });
           
-        
-       
-          console.log(newArray)
-          this.setState({
-            saved: newArray,
-            collabprojects: col
-          });
 
-    
+            console.log(newArray)
+      
+            
+            this.setState({
+              saved: newArray,
+              collabprojects: col
+            });
+        
+
+          
           //  console.log(response);  
           //  console.log(this.state.user._id);
           //  const response = res.data.search;
@@ -304,12 +351,12 @@ class Dashboard extends Component {
           if (response.data.status == "good") {
 
 
-      
+
             console.log("response sent")
             const gigster = {
               notifications: this.state.msg,
               userId: response.data.userId,
-              username : this.state.username,
+              username: this.state.username,
               projectId: this.state.showId,
               github: this.state.github
             }
@@ -330,14 +377,11 @@ class Dashboard extends Component {
                 this.setState({
                   msg: "",
                   github: "",
-    
-                  collabprojects: res.data
-
 
                 })
 
 
-                console.log(this.state.collabprojects);
+
 
               })
               .catch(err => console.log(err));
@@ -366,12 +410,7 @@ class Dashboard extends Component {
     })
   };
 
-  deleteProject = () => {
-    //let pId = this.state.showId;
-    const deleteIdProject = this.state.deleteId;
-    console.log(deleteIdProject);
-    API.deleteProject(deleteIdProject).then(res => console.log("deleted Successfully"));
-  }
+
 
   dataChange = (e) => {
     this.setState({
@@ -499,7 +538,7 @@ class Dashboard extends Component {
                               <br></br>
                               <Button className="btn" onClick={() => this.handleShowGigsters(myprojects._id)}>Requests From Collaborations</Button>
 
-                              
+
                             </Thumbnail>
                           )
                         }
@@ -513,7 +552,7 @@ class Dashboard extends Component {
               <Tab eventKey={2} title="My Collaborations">
                 <Grid>
                   <Row>
-                    {this.state.collabprojects ? (
+                    {this.state.collabprojects !== null ? (
                       <div className="flexContainer">
                         {this.state.collabprojects.map(myprojects => (
                           <Thumbnail className="flexThumbnail">
@@ -585,10 +624,10 @@ class Dashboard extends Component {
                     name="msg"
                     placeholder="Your Message Goes Here"
                     required
-                    style={{width: "500px"}}
+                    style={{ width: "500px" }}
                   >
                   </TextArea>
-    
+
                   <Input
                     value={this.state.github}
                     onChange={this.dataChange.bind(this)}
@@ -668,7 +707,7 @@ class Dashboard extends Component {
             </Modal>
 
             {/* check gigter request */}
-             <Modal
+            <Modal
 
               {...this.props}
               show={this.state.showgigsters}
@@ -682,44 +721,44 @@ class Dashboard extends Component {
 
                   console.log(project);
 
-                return (
-                  <Modal.Title id="contained-modal-title-lg">
-                   
-                  </Modal.Title>
-                )
+                  return (
+                    <Modal.Title id="contained-modal-title-lg">
+
+                    </Modal.Title>
+                  )
                 })}
               </Modal.Header>
               <Modal.Body>
                 {this.state.myprojects.map(project => project.gigster.map(gigster => {
-                
-           console.log(gigster);
-                return (
-                  <div>
-                    {gigster.projectId == this.state.gigid ? (
-                      <label >
-                     
-                <ListGroup style={{width:"500px", textAlign:"center"}}>
-                          <ListGroupItem>
-                          <h4>Hey! <a href="https://github.com/MJ3132" target="_blank">{gigster.username}</a> wants to collab: </h4>
-                            <p>{gigster.notifications}</p>
-                            <p>{gigster.github}</p>
-                            <span><Button onClick={() => this.approveProject()}>Approve</Button>&nbsp; &nbsp;
+
+                  console.log(gigster);
+                  return (
+                    <div>
+                      {gigster.projectId == this.state.gigid ? (
+                        <label >
+
+                          <ListGroup style={{ width: "500px", textAlign: "center" }}>
+                            <ListGroupItem>
+                              <h4>Hey! <a href="https://github.com/MJ3132" target="_blank">{gigster.username}</a> wants to collab: </h4>
+                              <p>{gigster.notifications}</p>
+                              <p>{gigster.github}</p>
+                              <span><Button onClick={() => this.approveProject()}>Approve</Button>&nbsp; &nbsp;
                             <Button type="button">Decline</Button></span>
-                          </ListGroupItem>
-                        </ListGroup>
-                      </label>
-                    )
-                      : (<h2>No Requests Yet</h2>)}
-                  </div>
-                )
-                       
+                            </ListGroupItem>
+                          </ListGroup>
+                        </label>
+                      )
+                        : (<h2>No Requests Yet</h2>)}
+                    </div>
+                  )
+
                 }))}
 
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={this.handleGigHide}>Close</Button>
               </Modal.Footer>
-            </Modal> 
+            </Modal>
 
           </Container>
         </div>
